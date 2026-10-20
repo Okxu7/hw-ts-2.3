@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// Застосування інтерфейсу до класу Cat (Кіт)
+// 1. Знаходимо контейнер у HTML-документі
+const container = document.getElementById('app-container');
+// 3. Застосування інтерфейсу до класу Cat (Кіт)[cite: 1]
 class Cat {
     name;
     speed;
@@ -11,13 +13,17 @@ class Cat {
         this.sound = sound;
     }
     move() {
-        console.log(`${this.name} бігає по землі на чотирьох лапах зі швидкістю ${this.speed} км/год.`);
+        let result = `🐱 Кіт "${this.name}" бігає по землі зі швидкістю ${this.speed} км/год.`;
         if (this.sound) {
-            console.log(`Видає звук: ${this.sound}`);
+            result += ` Звук: ${this.sound}.`;
         }
+        // Виводимо в консоль 
+        console.log(result);
+        // Повертаємо рядок для виведення на екран 
+        return result;
     }
 }
-// Застосування інтерфейсу до класу Bird (Птах)
+// 4. Застосування інтерфейсу до класу Bird (Птах)[cite: 1]
 class Bird {
     name;
     speed;
@@ -28,13 +34,17 @@ class Bird {
         this.habitat = habitat;
     }
     move() {
-        console.log(`${this.name} літає у повітрі зі швидкістю ${this.speed} км/год.`);
+        let result = `🐦 Птах "${this.name}" літає у повітрі зі швидкістю ${this.speed} км/год.`;
         if (this.habitat) {
-            console.log(`Середовище існування: ${this.habitat}`);
+            result += ` Середовище: ${this.habitat}.`;
         }
+        // Виводимо в консоль 
+        console.log(result);
+        // Повертаємо рядок для виведення на екран 
+        return result;
     }
 }
-// Застосування інтерфейсу до класу Fish (Риба)
+// 5. Застосування інтерфейсу до класу Fish (Риба)[cite: 1]
 class Fish {
     name;
     speed;
@@ -45,21 +55,30 @@ class Fish {
         this.habitat = habitat;
     }
     move() {
-        console.log(`${this.name} плаває під водою за допомогою плавників зі швидкістю ${this.speed} км/год.`);
+        let result = `🐟 Риба "${this.name}" плаває під водою зі швидкістю ${this.speed} км/год.`;
+        if (this.habitat) {
+            result += ` Середовище: ${this.habitat}.`;
+        }
+        // Виводимо в консоль 
+        console.log(result);
+        // Повертаємо рядок для виведення на екран 
+        return result;
     }
 }
-// ==========================================
-// Створення екземплярів та виклик методів
-// ==========================================
-const myCat = new Cat("Барсік", 15, "Мяу");
-const myBird = new Bird("Папуга Кеша", 40, "Тропіки");
-const myFish = new Fish("Немо", 5, "Океан");
-const silentFish = new Fish("Карась", 2); // Опціональна властивість habitat не передається
-myCat.move();
-console.log("-------------------");
-myBird.move();
-console.log("-------------------");
-myFish.move();
-console.log("-------------------");
-silentFish.move();
+// 6. Створення масиву екземплярів (об'єктів) тварин 
+const animalsList = [
+    new Cat("Барсік", 15, "Мяу"),
+    new Bird("Кеша", 40, "Тропіки"),
+    new Fish("Немо", 5, "Океан"),
+    new Fish("Карась", 2) // Опціональна властивість habitat не передається
+];
+// 7. Виведення списку тварин безпосередньо на екран у браузері
+if (container) {
+    animalsList.forEach(animal => {
+        const paragraph = document.createElement('p');
+        paragraph.className = 'animal-card';
+        paragraph.textContent = animal.move(); // Отримуємо опис через метод і виводимо
+        container.appendChild(paragraph);
+    });
+}
 //# sourceMappingURL=app.js.map
